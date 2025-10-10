@@ -1,6 +1,11 @@
-
+using System;
 using GameStore.API.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace GameStore.API
 {
@@ -10,15 +15,19 @@ namespace GameStore.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+           
+            var connFromEnv = Environment.GetEnvironmentVariable("GAMESTORE_CONNECTION");
+            var connectionString = !string.IsNullOrEmpty(connFromEnv)
+                ? connFromEnv
+                : builder.Configuration.GetConnectionString("DefaultConnection");
 
+           
             builder.Services.AddDbContext<GameStoreDbContext>(o =>
             {
-                o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                o.UseSqlServer(connectionString);
             });
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -34,7 +43,6 @@ namespace GameStore.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
