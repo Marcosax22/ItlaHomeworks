@@ -1,6 +1,8 @@
-using GameStore.API.Data;
+
 using GameStore.API.Middleware;
 using GameStore.API.Middlewares;
+using GameStore.Infrastructure.Data;
+using GameStore.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,9 @@ namespace GameStore.API
                 o.UseSqlServer(connectionString);
             });
 
+            builder.Services.AddScoped<GameRepository>();
+            builder.Services.AddScoped<UnitOfWork>();
+
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -42,10 +47,10 @@ namespace GameStore.API
                 app.UseSwaggerUI();
             }
 
+            app.UseHttpsRedirection();
+
             app.UseExceptionMiddleware();
             app.UseMiddleware<ResponseWrappingMiddleware>();
-
-            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

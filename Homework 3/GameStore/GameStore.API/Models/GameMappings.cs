@@ -1,12 +1,13 @@
-﻿using GameStore.API.Models.Entities;
+﻿using GameStore.API.Models.Dtos;
+using GameStore.Domain.Entities;
 
-namespace GameStore.API.Models.Dtos
+namespace GameStore.API.Models
 {
     public static class GameMappings
     {
         public static GameDto ToDto(this Games g) => new GameDto
         {
-            Id = g.id,
+            Id = g.Id,
             Name = g.Name,
             Description = g.Description,
             Price = g.Price
@@ -21,7 +22,7 @@ namespace GameStore.API.Models.Dtos
 
         public static void MapToEntity(this GameUpdateDto d, Games e)
         {
-            
+
             e.Name = d.Name;
             e.Description = d.Description;
             e.Price = d.Price;

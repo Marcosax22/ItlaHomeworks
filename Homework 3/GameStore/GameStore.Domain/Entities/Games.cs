@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using GameStore.Domain.Core;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GameStore.API.Models.Entities
+namespace GameStore.Domain.Entities
 {
-    public class Games
+    public class Games : BaseEntity
     {
-        public int id { get; set; }
-
         [MaxLength(50, ErrorMessage = "The field {0} must have no more than {1} characters.")]
         public string Name { get; set; } = null!;
         [MaxLength(500, ErrorMessage = "The field {0} must have no more than {1} characters.")]
