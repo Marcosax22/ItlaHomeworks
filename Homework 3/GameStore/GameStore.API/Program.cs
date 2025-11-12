@@ -3,13 +3,7 @@ using GameStore.API.Middleware;
 using GameStore.API.Middlewares;
 using GameStore.Infrastructure.Data;
 using GameStore.Infrastructure.Repositories;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using System;
 
 namespace GameStore.API
 {
@@ -19,13 +13,13 @@ namespace GameStore.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-           
+
             var connFromEnv = Environment.GetEnvironmentVariable("GAMESTORE_CONNECTION");
             var connectionString = !string.IsNullOrEmpty(connFromEnv)
                 ? connFromEnv
                 : builder.Configuration.GetConnectionString("DefaultConnection");
 
-           
+
             builder.Services.AddDbContext<GameStoreDbContext>(o =>
             {
                 o.UseSqlServer(connectionString);

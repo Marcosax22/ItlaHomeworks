@@ -1,10 +1,8 @@
-﻿using GameStore.Domain.Entities;
+﻿using GameStore.API.Models.Dtos;
+using GameStore.API.Models.Responses;
+using GameStore.Domain.Entities;
 using GameStore.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using GameStore.API.Models.Responses;   // ApiResponse, PageRequest, PageResult
-using GameStore.API.Models.Dtos;        // GameDto (si lo usas)
-using Microsoft.EntityFrameworkCore;
 
 namespace GameStore.API.Controllers
 {
@@ -20,10 +18,11 @@ namespace GameStore.API.Controllers
         }
 
         [HttpGet("List")]
-        public async Task<ActionResult<ApiResponse<PageResult<GameDto>>>> GetAllPaginated([FromQuery] PageRequest request)
+        public async Task<ActionResult<ApiResponse<PageResult<GameDto>>>> List([FromQuery] PageRequest request)
         {
             var query = _unitOfWork.Games
                 .Query()
+                .OrderBy(g => g.Id)
                 .Select(g => new GameDto
                 {
                     Id = g.Id,
@@ -33,7 +32,6 @@ namespace GameStore.API.Controllers
                 });
 
             var paged = await query.ToPageAsync(request);
-
             return Ok(ApiResponse<PageResult<GameDto>>.Success(paged, 200, "Games loaded successfully."));
         }
 

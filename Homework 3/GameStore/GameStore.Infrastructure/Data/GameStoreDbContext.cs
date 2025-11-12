@@ -1,6 +1,6 @@
 ﻿using GameStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
- 
+
 namespace GameStore.Infrastructure.Data
 {
     public class GameStoreDbContext : DbContext
@@ -8,7 +8,7 @@ namespace GameStore.Infrastructure.Data
         public GameStoreDbContext(DbContextOptions<GameStoreDbContext> options) : base(options)
         {
         }
-        public DbSet<Games> Games { get; set; } 
+        public DbSet<Games> Games { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

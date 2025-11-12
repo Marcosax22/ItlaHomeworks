@@ -20,14 +20,13 @@ namespace GameStore.Infrastructure.Repositories
 
         public Games? GetById(int id)
         {
-            // Find devuelve entidad trackeada si existe
+
             return _context.Games.Find(id);
         }
 
         public void Create(Games game)
         {
             _context.Games.Add(game);
-            // NO SaveChanges() aquí
         }
 
         public IQueryable<Games> Query()

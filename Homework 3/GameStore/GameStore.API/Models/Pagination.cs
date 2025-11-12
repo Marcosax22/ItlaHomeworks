@@ -1,15 +1,11 @@
-﻿namespace GameStore.API.Models.Responses
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace GameStore.API.Models.Responses
 {
     public class PageRequest
     {
-        public int Page { get; set; }
-        public int PageSize { get; set; }
-
-        public PageRequest(int page, int pageSize)
-        {
-            Page = page < 1 ? 1 : page;
-            PageSize = pageSize < 1 ? 5 : pageSize;
-        }
+        public int Page { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
     }
 
     public class PageResult<T>
@@ -34,17 +30,22 @@
     {
         public static async Task<PageResult<T>> ToPageAsync<T>(
             this IQueryable<T> query,
-            PageRequest request)
+            PageRequest request,
+            CancellationToken ct = default)
         {
-            var count = await Task.Run(() => query.Count());
-            var items = await Task.Run(() =>
-                query.Skip((request.Page - 1) * request.PageSize)
-                     .Take(request.PageSize)
-                     .ToList()
-            );
+            var page = request.Page < 1 ? 1 : request.Page;
+            var pageSize = (request.PageSize < 1 || request.PageSize > 200) ? 10 : request.PageSize;
 
-            return new PageResult<T>(items, count, request.Page, request.PageSize);
+            var total = await query.CountAsync(ct);
+
+            var ordered = query; 
+
+            var items = await ordered
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync(ct);
+
+            return new PageResult<T>(items, total, page, pageSize);
         }
     }
 }
-

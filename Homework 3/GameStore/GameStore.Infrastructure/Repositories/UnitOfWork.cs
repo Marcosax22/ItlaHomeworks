@@ -1,5 +1,4 @@
 ﻿using GameStore.Infrastructure.Data;
-using System.Threading.Tasks;
 
 namespace GameStore.Infrastructure.Repositories
 {
@@ -7,7 +6,6 @@ namespace GameStore.Infrastructure.Repositories
     {
         private readonly GameStoreDbContext _context;
 
-        // Exponer el repositorio con el nombre Games (así tu código lo espera)
         public GameRepository Games { get; }
 
         public UnitOfWork(GameStoreDbContext context, GameRepository gameRepository)
@@ -16,13 +14,11 @@ namespace GameStore.Infrastructure.Repositories
             Games = gameRepository;
         }
 
-        // Sincrónico
         public void Complete()
         {
             _context.SaveChanges();
         }
 
-        // Asíncrono (útil desde controllers async)
         public Task SaveAsync()
         {
             return _context.SaveChangesAsync();

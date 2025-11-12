@@ -11,7 +11,7 @@ namespace GameStore.Domain.Entities
         [MaxLength(500, ErrorMessage = "The field {0} must have no more than {1} characters.")]
         public string Description { get; set; } = null!;
 
-        [Column (TypeName = "decimal(18,2)")]
+        [Column(TypeName = "decimal(18,2)")]
         [DisplayFormat(DataFormatString = "{0:C2}")]
         public decimal Price { get; set; }
     }
