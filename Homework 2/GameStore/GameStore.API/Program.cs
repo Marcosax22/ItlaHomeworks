@@ -1,11 +1,13 @@
-using System;
 using GameStore.API.Data;
-using Microsoft.EntityFrameworkCore;
+using GameStore.API.Middleware;
+using GameStore.API.Middlewares;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace GameStore.API
 {
@@ -39,6 +41,9 @@ namespace GameStore.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseExceptionMiddleware();
+            app.UseMiddleware<ResponseWrappingMiddleware>();
 
             app.UseHttpsRedirection();
 

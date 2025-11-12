@@ -17,3 +17,4 @@ namespace GameStore.API.Models.Entities
         public decimal Price { get; set; }
     }
 }
+

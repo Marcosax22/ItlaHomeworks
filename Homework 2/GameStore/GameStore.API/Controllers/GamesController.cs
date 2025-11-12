@@ -1,10 +1,10 @@
 ﻿//Marcos Ariel 2024-1785
 using GameStore.API.Data;
+using GameStore.API.Models;
 using GameStore.API.Models.Dtos;
-using GameStore.API.Models.Entities;
+using GameStore.API.Models.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace GameStore.API.Controllers
 {
@@ -22,12 +22,51 @@ namespace GameStore.API.Controllers
         }
 
         [HttpGet("List")]
-        public async Task<ActionResult<IEnumerable<GameDto>>> GetAll()
+        public async Task<ActionResult<ApiResponse<PageResult<GameDto>>>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 5)
         {
-            var entities = await _context.Games.ToListAsync();
-            var dtos = entities.Select(e => e.ToDto());
-            return Ok(dtos);
+            var query = _context.Games
+                .AsNoTracking()
+                .Select(g => g.ToDto());
+
+            var request = new PageRequest(page, pageSize);
+            var pagedResult = await query.ToPageAsync(request);
+
+            var response = ApiResponse<PageResult<GameDto>>.Success(
+                pagedResult,
+                200,
+                "Games loaded successfully."
+            );
+
+            return Ok(response);
         }
+
+        //[HttpGet("List")]
+        //public async Task<ActionResult<Pagination<GameDto>>> GetAll(int pageNumber = 1, int pageSize = 5)
+        //{
+        //    if (pageNumber < 1 || pageSize < 1)
+        //        return BadRequest(new { message = "PageNumber and PageSize must be greater than 0." });
+
+        //    var query = _context.Games.AsQueryable();
+        //    var totalCount = await query.CountAsync();
+
+        //    var entities = await query
+        //        .OrderBy(g => g.id) 
+        //        .Skip((pageNumber - 1) * pageSize)
+        //        .Take(pageSize)
+        //        .ToListAsync();
+
+        //    var dtos = entities.Select(e => e.ToDto());
+
+        //    var result = new Pagination<GameDto>
+        //    {
+        //        PageNumber = pageNumber,
+        //        PageSize = pageSize,
+        //        TotalCount = totalCount,
+        //        Data = dtos
+        //    };
+
+        //    return Ok(result);
+        //}
 
         [HttpGet("Details/{id:int}")]
         public async Task<ActionResult<GameDto>> GetById(int id)
