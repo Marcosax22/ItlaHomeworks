@@ -1,6 +1,7 @@
 
 using GameStore.API.Middleware;
 using GameStore.API.Middlewares;
+using GameStore.Business.Services;
 using GameStore.Infrastructure.Data;
 using GameStore.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ namespace GameStore.API
 
             builder.Services.AddScoped<GameRepository>();
             builder.Services.AddScoped<UnitOfWork>();
+            builder.Services.AddScoped<GameService>();
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();

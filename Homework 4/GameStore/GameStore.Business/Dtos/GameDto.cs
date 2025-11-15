@@ -1,4 +1,4 @@
-﻿namespace GameStore.API.Models.Dtos
+﻿namespace GameStore.Business.Dtos
 {
     public class GameDto
     {

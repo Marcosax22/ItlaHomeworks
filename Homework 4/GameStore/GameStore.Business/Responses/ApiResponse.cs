@@ -1,11 +1,11 @@
-﻿namespace GameStore.API.Models.Responses
+﻿namespace GameStore.Business.Responses
 {
     public class ApiResponse<T>
     {
         public bool IsSuccess { get; set; }
         public string Message { get; set; } = string.Empty;
         public T? Data { get; set; }
-        public int StatusCode { get; set; } = 200; 
+        public int StatusCode { get; set; } = 200;
 
         public static ApiResponse<T> Success(T data, int code = 200, string message = "Success")
         {

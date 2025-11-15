@@ -1,7 +1,7 @@
-﻿using GameStore.API.Models.Dtos;
+﻿using GameStore.Business.Dtos;
 using GameStore.Domain.Entities;
 
-namespace GameStore.API.Models
+namespace GameStore.Business.Models
 {
     public static class GameMappings
     {

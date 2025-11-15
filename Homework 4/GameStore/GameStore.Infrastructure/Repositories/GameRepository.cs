@@ -20,13 +20,7 @@ namespace GameStore.Infrastructure.Repositories
 
         public Games? GetById(int id)
         {
-
             return _context.Games.Find(id);
-        }
-
-        public void Create(Games game)
-        {
-            _context.Games.Add(game);
         }
 
         public IQueryable<Games> Query()
@@ -34,17 +28,14 @@ namespace GameStore.Infrastructure.Repositories
             return _context.Games.AsNoTracking();
         }
 
-        public void Update(int id, Games updatedGame)
+        public void Create(Games game)
         {
-            var existing = _context.Games.Find(id);
-            if (existing == null)
-                throw new KeyNotFoundException("Game not found");
+            _context.Games.Add(game);
+        }
 
-            existing.Name = updatedGame.Name;
-            existing.Description = updatedGame.Description;
-            existing.Price = updatedGame.Price;
-
-            _context.Games.Update(existing);
+        public void Update(Games game)
+        {
+            _context.Games.Update(game);
         }
 
         public void Delete(int id)

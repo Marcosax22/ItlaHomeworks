@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace GameStore.API.Models.Responses
+namespace GameStore.Business.Responses.Models
 {
     public class PageRequest
     {
         public int Page { get; set; } = 1;
-        public int PageSize { get; set; } = 10;
+        public int PageSize { get; set; } = 5;
     }
 
     public class PageResult<T>
@@ -34,7 +34,7 @@ namespace GameStore.API.Models.Responses
             CancellationToken ct = default)
         {
             var page = request.Page < 1 ? 1 : request.Page;
-            var pageSize = (request.PageSize < 1 || request.PageSize > 200) ? 10 : request.PageSize;
+            var pageSize = (request.PageSize < 1 || request.PageSize > 200) ? 5 : request.PageSize;
 
             var total = await query.CountAsync(ct);
 

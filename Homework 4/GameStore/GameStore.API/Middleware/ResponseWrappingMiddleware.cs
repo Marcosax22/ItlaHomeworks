@@ -1,4 +1,4 @@
-﻿using GameStore.API.Models.Responses;
+﻿using GameStore.Business.Responses;
 using System.Text;
 using System.Text.Json;
 
