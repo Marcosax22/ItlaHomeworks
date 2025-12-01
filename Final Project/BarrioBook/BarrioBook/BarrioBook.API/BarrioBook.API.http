@@ -1,0 +1,6 @@
+@BarrioBook.API_HostAddress = http://localhost:5263
+
+GET {{BarrioBook.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

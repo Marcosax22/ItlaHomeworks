@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36221.1 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarrioBook.API", "BarrioBook.API\BarrioBook.API.csproj", "{93D421AE-CD5F-43B4-9109-F6D41358C6A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarrioBook.Domain", "BarrioBook.Domain\BarrioBook.Domain.csproj", "{C284BF54-D654-4AEE-82BD-7DE80FFA4C7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarrioBook.Infrastructure", "BarrioBook.Infrastructure\BarrioBook.Infrastructure.csproj", "{F7F58A95-A736-4B00-8CEF-80CF93BA46C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarrioBook.Application", "BarrioBook.Application\BarrioBook.Application.csproj", "{E2C212FB-4746-40E4-BF84-D29C255009FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93D421AE-CD5F-43B4-9109-F6D41358C6A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D421AE-CD5F-43B4-9109-F6D41358C6A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D421AE-CD5F-43B4-9109-F6D41358C6A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D421AE-CD5F-43B4-9109-F6D41358C6A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C284BF54-D654-4AEE-82BD-7DE80FFA4C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C284BF54-D654-4AEE-82BD-7DE80FFA4C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C284BF54-D654-4AEE-82BD-7DE80FFA4C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C284BF54-D654-4AEE-82BD-7DE80FFA4C7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7F58A95-A736-4B00-8CEF-80CF93BA46C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7F58A95-A736-4B00-8CEF-80CF93BA46C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7F58A95-A736-4B00-8CEF-80CF93BA46C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7F58A95-A736-4B00-8CEF-80CF93BA46C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2C212FB-4746-40E4-BF84-D29C255009FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2C212FB-4746-40E4-BF84-D29C255009FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2C212FB-4746-40E4-BF84-D29C255009FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2C212FB-4746-40E4-BF84-D29C255009FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFB5A0FA-63AD-4B51-92D0-D28A58914BFE}
+	EndGlobalSection
+EndGlobal
