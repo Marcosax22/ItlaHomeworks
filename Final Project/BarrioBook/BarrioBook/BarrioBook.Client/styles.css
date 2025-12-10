@@ -27,7 +27,6 @@ body {
     color: var(--text);
 }
 
-/* NAVBAR */
 
 .navbar {
     height: 56px;
@@ -54,7 +53,6 @@ body {
     margin-right: 12px;
 }
 
-/* LAYOUT */
 
 .main {
     min-height: calc(100vh - 56px);
@@ -79,7 +77,6 @@ body {
     box-shadow: var(--shadow-soft);
 }
 
-/* AUTH */
 
 .auth-tabs {
     display: flex;
@@ -119,7 +116,6 @@ body {
     margin-bottom: 4px;
 }
 
-/* APP */
 
 .app-container {
     width: 100%;
@@ -169,7 +165,6 @@ body {
     margin-bottom: 16px;
 }
 
-/* CARDS */
 
 .card {
     background: var(--card-bg);
@@ -190,8 +185,6 @@ body {
         grid-template-columns: minmax(0, 1fr);
     }
 }
-
-/* FORM / INPUTS */
 
 .form {
     display: flex;
@@ -236,7 +229,6 @@ body {
     margin-top: 6px;
 }
 
-/* TABLES */
 
 .table-wrapper {
     max-height: 400px;
@@ -278,7 +270,6 @@ body {
     color: var(--primary);
 }
 
-/* IMÁGENES LIBRO */
 
 .book-thumb {
     width: 40px;
@@ -289,7 +280,6 @@ body {
     cursor: pointer;
 }
 
-/* ITEMS (Pedidos / Ventas) */
 
 .items-header {
     display: flex;

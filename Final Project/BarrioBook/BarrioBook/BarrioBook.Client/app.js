@@ -52,7 +52,6 @@ async function apiRequest(path, { method = "GET", body = null, auth = true } = {
     return response.json();
 }
 
-// ===== MANEJO DE AUTH =====
 async function handleLogin(event) {
     event.preventDefault();
     const email = $("#loginEmail").value.trim();
@@ -67,7 +66,6 @@ async function handleLogin(event) {
             auth: false,
         });
 
-        // AuthResult del backend: { token, customer }
         authToken = result.token;
         currentCustomer = result.customer;
 
@@ -89,14 +87,12 @@ async function handleRegister(event) {
     setText(errorEl, "");
 
     try {
-        // Registrar cliente
         await apiRequest("/auth/register", {
             method: "POST",
             body: { name, phone, email, password },
             auth: false,
         });
 
-        // Auto-login después de registrar
         const loginResult = await apiRequest("/auth/login", {
             method: "POST",
             body: { email, password },
@@ -138,7 +134,6 @@ function handleLogout() {
     updateAuthUI();
 }
 
-// ===== TABS =====
 function setupTabs() {
     const tabs = $$(".tab");
     tabs.forEach((tab) => {
@@ -154,7 +149,6 @@ function setupTabs() {
     });
 }
 
-// ===== LIBROS =====
 async function loadBooks() {
     const tbody = $("#booksTable tbody");
     tbody.innerHTML = "<tr><td colspan='8'>Cargando...</td></tr>";
@@ -162,10 +156,9 @@ async function loadBooks() {
     try {
         const response = await apiRequest(
             "/books/List?PageNumber=1&PageSize=50",
-            { auth: false } // el endpoint permite anónimo
+            { auth: false } 
         );
 
-        // ApiResponse<PageResult<BookDto>>
         const page = response.data;
         const items = page?.items ?? [];
 
@@ -199,7 +192,6 @@ async function loadBooks() {
             tbody.appendChild(tr);
         }
 
-        // Eventos de editar / borrar
         tbody.querySelectorAll("[data-edit]").forEach((btn) => {
             btn.addEventListener("click", () => {
                 const id = parseInt(btn.dataset.edit, 10);
@@ -222,7 +214,6 @@ async function loadBooks() {
             });
         });
 
-        // Click en imagen para abrir en nueva pestaña
         tbody.querySelectorAll(".book-thumb").forEach((img) => {
             img.addEventListener("click", () => {
                 window.open(img.src, "_blank");
@@ -274,13 +265,11 @@ async function handleBookFormSubmit(event) {
 
     try {
         if (id === null) {
-            // Crear
             await apiRequest("/books/Create", {
                 method: "POST",
                 body: dto,
             });
         } else {
-            // Actualizar
             await apiRequest(`/books/${id}/Update`, {
                 method: "PUT",
                 body: dto,
@@ -295,7 +284,6 @@ async function handleBookFormSubmit(event) {
     }
 }
 
-// ===== CLIENTES (CRUD) =====
 async function loadCustomers() {
     const tbody = $("#customersTable tbody");
     tbody.innerHTML = "<tr><td colspan='6'>Cargando...</td></tr>";
@@ -685,7 +673,6 @@ async function loadSales() {
     }
 }
 
-// ==== helper específico para la ruta rara de ventas (/Create) ====
 async function createSaleRequest(dto) {
     const headers = { "Content-Type": "application/json" };
     if (authToken) {
