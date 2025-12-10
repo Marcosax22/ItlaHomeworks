@@ -4,6 +4,7 @@ using BarrioBook.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarrioBook.Infrastructure.Migrations
 {
     [DbContext(typeof(BarrioBookDbContext))]
-    partial class BarrioBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251207234659_AddCustomerAuthFields")]
+    partial class AddCustomerAuthFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +42,6 @@ namespace BarrioBook.Infrastructure.Migrations
 
                     b.Property<int>("CurrentStock")
                         .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("SalePrice")
                         .HasColumnType("decimal(18,2)");
@@ -156,9 +156,6 @@ namespace BarrioBook.Infrastructure.Migrations
                     b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("SaleDate")
                         .HasColumnType("datetime2");
 
@@ -168,10 +165,6 @@ namespace BarrioBook.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
-
-                    b.HasIndex("OrderId")
-                        .IsUnique()
-                        .HasFilter("[OrderId] IS NOT NULL");
 
                     b.ToTable("Sales");
                 });
@@ -274,13 +267,7 @@ namespace BarrioBook.Infrastructure.Migrations
                         .WithMany("Sales")
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("BarrioBook.Domain.Entities.Order", "Order")
-                        .WithOne("Sale")
-                        .HasForeignKey("BarrioBook.Domain.Entities.Sale", "OrderId");
-
                     b.Navigation("Customer");
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("BarrioBook.Domain.Entities.SaleItem", b =>
@@ -312,8 +299,6 @@ namespace BarrioBook.Infrastructure.Migrations
             modelBuilder.Entity("BarrioBook.Domain.Entities.Order", b =>
                 {
                     b.Navigation("Items");
-
-                    b.Navigation("Sale");
                 });
 
             modelBuilder.Entity("BarrioBook.Domain.Entities.Sale", b =>

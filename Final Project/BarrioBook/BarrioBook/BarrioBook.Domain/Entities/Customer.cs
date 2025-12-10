@@ -1,9 +1,4 @@
 ﻿using BarrioBook.Domain.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BarrioBook.Domain.Entities
 {
@@ -13,9 +8,27 @@ namespace BarrioBook.Domain.Entities
         public string? Phone { get; set; }
         public string? Email { get; set; }
 
-        public DateTime RegisteredAt { get; set; } = DateTime.Now;
+        public string PasswordHash { get; set; } = string.Empty;
+        public string Role { get; set; } = "Customer";
+
+        public DateTime RegisteredAt { get; set; }
 
         public List<Order> Orders { get; set; } = new();
         public List<Sale> Sales { get; set; } = new();
+
+        public Customer()
+        {
+            RegisteredAt = DateTime.Now;
+        }
+
+        public Customer(string name, string email, string passwordHash, string? phone = null, string role = "Customer")
+        {
+            Name = name;
+            Email = email;
+            PasswordHash = passwordHash;
+            Phone = phone;
+            Role = role;
+            RegisteredAt = DateTime.Now;
+        }
     }
 }

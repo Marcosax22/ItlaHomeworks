@@ -1,9 +1,6 @@
 ﻿using BarrioBook.Domain.Entities;
 using BarrioBook.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BarrioBook.Infrastructure.Repositories
 {

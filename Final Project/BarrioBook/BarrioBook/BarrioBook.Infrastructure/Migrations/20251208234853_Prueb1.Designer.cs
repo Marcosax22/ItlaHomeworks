@@ -4,6 +4,7 @@ using BarrioBook.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarrioBook.Infrastructure.Migrations
 {
     [DbContext(typeof(BarrioBookDbContext))]
-    partial class BarrioBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251208234853_Prueb1")]
+    partial class Prueb1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +42,6 @@ namespace BarrioBook.Infrastructure.Migrations
 
                     b.Property<int>("CurrentStock")
                         .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("SalePrice")
                         .HasColumnType("decimal(18,2)");

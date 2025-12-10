@@ -1,9 +1,4 @@
 ﻿using BarrioBook.Domain.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BarrioBook.Domain.Entities
 {
@@ -13,10 +8,9 @@ namespace BarrioBook.Domain.Entities
         public string Author { get; set; } = null!;
         public decimal SalePrice { get; set; }
         public int CurrentStock { get; set; }
-
         public int? SupplierId { get; set; }
         public Supplier? Supplier { get; set; }
-
+        public string? ImageUrl { get; set; }
         public DateTime AddedAt { get; set; } = DateTime.Now;
     }
 }

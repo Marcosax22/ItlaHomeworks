@@ -1,10 +1,4 @@
 ﻿using BarrioBook.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BarrioBook.Infrastructure.Repositories;
 
 namespace BarrioBook.Infrastructure.Repositories
 {

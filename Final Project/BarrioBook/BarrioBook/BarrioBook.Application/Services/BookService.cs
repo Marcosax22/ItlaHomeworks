@@ -2,11 +2,6 @@
 using BarrioBook.Application.Models;
 using BarrioBook.Domain.Entities;
 using BarrioBook.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static BarrioBook.Application.Models.Pagination;
 
 
@@ -32,7 +27,8 @@ namespace BarrioBook.Application.Services
                     SalePrice = b.SalePrice,
                     CurrentStock = b.CurrentStock,
                     SupplierId = b.SupplierId,
-                    SupplierName = b.Supplier != null ? b.Supplier.Name : null
+                    SupplierName = b.Supplier != null ? b.Supplier.Name : null,
+                    ImageUrl = b.ImageUrl
                 });
 
             return await query.ToPageAsync(request);
@@ -51,7 +47,8 @@ namespace BarrioBook.Application.Services
                 SalePrice = book.SalePrice,
                 CurrentStock = book.CurrentStock,
                 SupplierId = book.SupplierId,
-                SupplierName = book.Supplier?.Name
+                SupplierName = book.Supplier?.Name,
+                ImageUrl = book.ImageUrl
             };
         }
 
@@ -63,7 +60,8 @@ namespace BarrioBook.Application.Services
                 Author = dto.Author,
                 SalePrice = dto.SalePrice,
                 CurrentStock = dto.CurrentStock,
-                SupplierId = dto.SupplierId
+                SupplierId = dto.SupplierId,
+                ImageUrl = dto.ImageUrl
             };
 
             await _uow.Books.AddAsync(book);
@@ -81,6 +79,7 @@ namespace BarrioBook.Application.Services
             book.SalePrice = dto.SalePrice;
             book.CurrentStock = dto.CurrentStock;
             book.SupplierId = dto.SupplierId;
+            book.ImageUrl = dto.ImageUrl;
 
             _uow.Books.Update(book);
             await _uow.SaveChangesAsync();
