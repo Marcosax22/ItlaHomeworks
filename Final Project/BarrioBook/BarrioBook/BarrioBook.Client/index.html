@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>BarrioBook – Panel</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="navbar__left">
+            <span class="logo">📚 BarrioBook</span>
+        </div>
+        <div class="navbar__right">
+            <span id="userInfo" class="user-info">No has iniciado sesión</span>
+            <button id="logoutBtn" class="btn btn-outline btn-small hidden">Cerrar sesión</button>
+        </div>
+    </header>
+
+    <main class="main">
+
+        <section id="authView" class="auth-container">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <button id="loginTab" class="auth-tab active">Iniciar sesión</button>
+                    <button id="registerTab" class="auth-tab">Registrarse</button>
+                </div>
+
+                <form id="loginForm" class="auth-form">
+                    <h1 class="auth-title">Iniciar sesión</h1>
+                    <label class="form-label">
+                        Email
+                        <input type="email" id="loginEmail" class="form-input" required />
+                    </label>
+                    <label class="form-label">
+                        Password
+                        <input type="password" id="loginPassword" class="form-input" required />
+                    </label>
+                    <p id="loginError" class="form-error"></p>
+                    <button type="submit" class="btn btn-primary btn-full">Entrar</button>
+                </form>
+
+                <form id="registerForm" class="auth-form hidden">
+                    <h1 class="auth-title">Crear cuenta</h1>
+                    <label class="form-label">
+                        Nombre
+                        <input type="text" id="registerName" class="form-input" required />
+                    </label>
+                    <label class="form-label">
+                        Teléfono (opcional)
+                        <input type="tel" id="registerPhone" class="form-input" />
+                    </label>
+                    <label class="form-label">
+                        Email
+                        <input type="email" id="registerEmail" class="form-input" required />
+                    </label>
+                    <label class="form-label">
+                        Password (mínimo 6 caracteres)
+                        <input type="password" id="registerPassword" class="form-input" minlength="6" required />
+                    </label>
+                    <p id="registerError" class="form-error"></p>
+                    <button type="submit" class="btn btn-primary btn-full">Registrarme</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="appView" class="app-container hidden">
+
+            <nav class="tabs">
+                <button class="tab active" data-view="booksView">Libros</button>
+                <button class="tab" data-view="customersView">Clientes</button>
+                <button class="tab" data-view="suppliersView">Proveedores</button>
+                <button class="tab" data-view="ordersView">Pedidos</button>
+                <button class="tab" data-view="salesView">Ventas</button>
+            </nav>
+
+            <section id="booksView" class="view active">
+                <div class="view-header">
+                    <h2>Libros</h2>
+                    <button id="refreshBooksBtn" class="btn btn-outline">Actualizar lista</button>
+                </div>
+
+                <div class="grid-2">
+
+                    <div class="card">
+                        <h3>Listado de libros</h3>
+                        <div class="table-wrapper">
+                            <table id="booksTable" class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Título</th>
+                                        <th>Autor</th>
+                                        <th>Precio</th>
+                                        <th>Stock</th>
+                                        <th>Proveedor</th>
+                                        <th>Imagen</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 id="bookFormTitle">Nuevo libro</h3>
+                        <form id="bookForm" class="form">
+                            <input type="hidden" id="bookId" />
+                            <label class="form-label">
+                                Título
+                                <input type="text" id="bookTitle" class="form-input" required />
+                            </label>
+                            <label class="form-label">
+                                Autor
+                                <input type="text" id="bookAuthor" class="form-input" required />
+                            </label>
+                            <label class="form-label">
+                                Precio de venta
+                                <input type="number" step="0.01" id="bookPrice" class="form-input" required />
+                            </label>
+                            <label class="form-label">
+                                Stock actual
+                                <input type="number" id="bookStock" class="form-input" required />
+                            </label>
+                            <label class="form-label">
+                                ID Proveedor (opcional)
+                                <input type="number" id="bookSupplierId" class="form-input" />
+                            </label>
+                            <label class="form-label">
+                                URL de imagen (opcional)
+                                <input type="text" id="bookImageUrl" class="form-input" />
+                            </label>
+                            <p id="bookFormError" class="form-error"></p>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" id="bookFormReset" class="btn btn-secondary">Limpiar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section id="customersView" class="view">
+                <div class="view-header">
+                    <h2>Clientes</h2>
+                    <button id="refreshCustomersBtn" class="btn btn-outline">Actualizar lista</button>
+                </div>
+                <div class="card">
+                    <h3>Listado de clientes</h3>
+                    <div class="table-wrapper">
+                        <table id="customersTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Teléfono</th>
+                                    <th>Email</th>
+                                    <th>Registrado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <hr class="divider-line" />
+
+                    <h3>Gestionar cliente</h3>
+                    <form id="customerForm" class="form">
+                        <input type="hidden" id="customerId" />
+                        <label class="form-label">
+                            Nombre
+                            <input type="text" id="customerName" class="form-input" required />
+                        </label>
+                        <label class="form-label">
+                            Teléfono
+                            <input type="text" id="customerPhone" class="form-input" />
+                        </label>
+                        <label class="form-label">
+                            Email
+                            <input type="email" id="customerEmail" class="form-input" />
+                        </label>
+                        <p id="customerFormError" class="form-error"></p>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="button" id="customerFormReset" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="suppliersView" class="view">
+                <div class="view-header">
+                    <h2>Proveedores</h2>
+                    <button id="refreshSuppliersBtn" class="btn btn-outline">Actualizar lista</button>
+                </div>
+                <div class="card">
+                    <h3>Listado de proveedores</h3>
+                    <div class="table-wrapper">
+                        <table id="suppliersTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Contacto</th>
+                                    <th>Asociado desde</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="hint">
+                        Recuerda: el backend exige rol <strong>Admin</strong> para esta sección.
+                    </p>
+
+                    <hr class="divider-line" />
+
+                    <h3>Gestionar proveedor</h3>
+                    <form id="supplierForm" class="form">
+                        <input type="hidden" id="supplierId" />
+                        <label class="form-label">
+                            Nombre
+                            <input type="text" id="supplierName" class="form-input" required />
+                        </label>
+                        <label class="form-label">
+                            Información de contacto
+                            <textarea id="supplierContactInfo" rows="3" class="form-input"></textarea>
+                        </label>
+                        <p id="supplierFormError" class="form-error"></p>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="button" id="supplierFormReset" class="btn btn-secondary">Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="ordersView" class="view">
+                <div class="view-header">
+                    <h2>Pedidos</h2>
+                    <button id="refreshOrdersBtn" class="btn btn-outline">Actualizar lista</button>
+                </div>
+
+                <div class="card">
+                    <h3>Listado de pedidos</h3>
+                    <div class="table-wrapper">
+                        <table id="ordersTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th># Items</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="hint">
+                        Desde el frontend puedes crear pedidos y cancelarlos;  
+                        la lógica de stock y estados se maneja en el backend.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Nuevo pedido</h3>
+                    <form id="orderForm" class="form">
+                        <label class="form-label">
+                            ID Cliente (opcional)
+                            <input type="number" id="orderCustomerId" class="form-input" min="1" />
+                        </label>
+
+                        <div class="items-header">
+                            <span>Libros del pedido</span>
+                            <button type="button" id="addOrderItemBtn" class="btn btn-small btn-secondary">
+                                + Agregar libro
+                            </button>
+                        </div>
+                        <div id="orderItemsContainer" class="items-container"></div>
+
+                        <p id="orderFormError" class="form-error"></p>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Crear pedido</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section id="salesView" class="view">
+                <div class="view-header">
+                    <h2>Ventas</h2>
+                    <button id="refreshSalesBtn" class="btn btn-outline">Actualizar lista</button>
+                </div>
+
+                <div class="card">
+                    <h3>Listado de ventas</h3>
+                    <div class="table-wrapper">
+                        <table id="salesTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Total</th>
+                                    <th># Items</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <p class="hint">
+                        Igual que en pedidos, aquí consumimos el listado generado por el backend.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>Nueva venta</h3>
+                    <form id="saleForm" class="form">
+                        <label class="form-label">
+                            ID Cliente (opcional)
+                            <input type="number" id="saleCustomerId" class="form-input" min="1" />
+                        </label>
+                        <label class="form-label">
+                            ID Pedido (opcional, si viene de un pedido)
+                            <input type="number" id="saleOrderId" class="form-input" min="1" />
+                        </label>
+
+                        <div class="items-header">
+                            <span>Libros vendidos</span>
+                            <button type="button" id="addSaleItemBtn" class="btn btn-small btn-secondary">
+                                + Agregar libro
+                            </button>
+                        </div>
+                        <div id="saleItemsContainer" class="items-container"></div>
+
+                        <p id="saleFormError" class="form-error"></p>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Registrar venta</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
